@@ -1,4 +1,4 @@
-import { LinkedList } from "./LinkedList";
+import { LinkedList } from "./LinkedList.js";
 
 const list = new LinkedList();
 
@@ -9,4 +9,5 @@ list.append("hamster");
 list.append("snake");
 list.append("turtle");
 
-console.log(list.toString());
+// console.log(list.toString());
+console.log(list.removeAt(4));

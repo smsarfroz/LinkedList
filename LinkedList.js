@@ -1,4 +1,4 @@
-import { Node } from "./Node";
+import { Node } from "./Node.js";
 
 class LinkedList {
     constructor() {
@@ -6,7 +6,12 @@ class LinkedList {
         this.tail = new Node();
     }
     append(value) {
-        let newNode = Node(value);
+        let newNode = new Node(value);
+        if (this.head.value == null && this.tail.value == null) {
+            this.head = newNode;
+            this.tail = newNode;
+            return;
+        }
         this.tail.nextNode = newNode;
         newNode.nextNode = null;
         
@@ -14,6 +19,11 @@ class LinkedList {
     }
     prepend(value) {
         let newNode = Node(value);
+        if (this.head.value == null && this.tail.value == null) {
+            this.head = newNode;
+            this.tail = newNode;
+            return;
+        }
         newNode.nextNode = this.head;
         
         this.head = newNode;
@@ -82,7 +92,33 @@ class LinkedList {
             str += `(${this.at(i).value}) -> `;
         }
         str += `null`;
-        console.log(str);
+        return str;
+    }
+    insertAt(value, index) {
+        if (index == 0) {
+            this.prepend(value);
+        } else if (index ==this.size()) {
+            this.append(value);
+        } else {
+            index--;
+            let newNode = new Node(value);
+            let cur = this.at(index);
+            let next = cur.nextNode;
+            cur.nextNode = newNode;
+            newNode.nextNode = next;
+        }
+    }
+    removeAt(index) {
+        if (index == 0) {
+            this.head = this.at(1);
+        } else if (index == this.size()-1) {
+            this.tail = this.at(index-1);
+            this.tail.nextNode = null;
+        } else {
+            let prev = this.at(index-1);
+            let next = this.at(index+1);
+            prev.nextNode = next;
+        }
     }
 }
 
