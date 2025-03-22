@@ -18,7 +18,7 @@ class LinkedList {
         this.tail = newNode; 
     }
     prepend(value) {
-        let newNode = Node(value);
+        let newNode = new Node(value);
         if (this.head.value == null && this.tail.value == null) {
             this.head = newNode;
             this.tail = newNode;
@@ -40,13 +40,16 @@ class LinkedList {
         }
         return totalNumberOfNodes;
     }
-    head() {
+    Head() {
         return this.head;
     }
-    tail() {
+    Tail() {
         return this.tail;
     }
     at(index) {
+        if (index < 0 || index >= this.size()) {
+            return null;
+        }
         let curNode = this.head; 
         let curId = 0;
 
@@ -57,6 +60,10 @@ class LinkedList {
         return curNode;
     }
     pop() {
+        if (this.size() == 0) {
+            console.log("Can't remove any node from empty list!");
+            return;
+        }
         let cur = this.head;
         let next = this.head.nextNode;
 
@@ -95,6 +102,10 @@ class LinkedList {
         return str;
     }
     insertAt(value, index) {
+        if (index < 0 || index > this.size()) {
+            console.log("Can't insert at that index. Choose a valid index.");
+            return;
+        }
         if (index == 0) {
             this.prepend(value);
         } else if (index ==this.size()) {
@@ -107,8 +118,13 @@ class LinkedList {
             cur.nextNode = newNode;
             newNode.nextNode = next;
         }
+        return this.toString();
     }
     removeAt(index) {
+        if (index < 0 || index >= this.size()) {
+            console.log("Can't remove node at that index. Choose a valid index");
+            return;
+        }
         if (index == 0) {
             this.head = this.at(1);
         } else if (index == this.size()-1) {
