@@ -68,14 +68,16 @@ class LinkedList {
         let next = this.head.nextNode;
 
         if (next == null) {
-            this.head = null;
+            this.head = new Node();
             return;
         }
         while (next.nextNode != null) {
             cur = next;
             next = cur.nextNode;
         }
+        cur.nodeValue = null;
         cur.nextNode = null;
+        this.tail = null;
     }
     contains(value) {
         for (let i = 0; i < this.size(); ++i) {
