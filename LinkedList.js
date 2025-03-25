@@ -126,7 +126,12 @@ class LinkedList {
             return;
         }
         if (index == 0) {
-            this.head = this.at(1);
+            if (this.size() === 1) {
+                this.head = null;
+                this.tail = null;
+            } else {
+                this.head = this.at(1);
+            }
         } else if (index == this.size()-1) {
             this.tail = this.at(index-1);
             this.tail.nextNode = null;
